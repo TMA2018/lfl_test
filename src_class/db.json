@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "name": "Mikel",
+      "phone": "898987",
+      "email": "miafa@mail.ru",
+      "country": "USSR",
+      "age": 18,
+      "id": "1"
+    },
+    {
+      "name": "Ivan",
+      "phone": "891848484",
+      "email": "iafa@nnka.usa",
+      "country": "USA",
+      "age": 24,
+      "id": "2"
+    },
+    {
+      "name": "User1",
+      "phone": "898987",
+      "email": "miafa@mail.ru",
+      "country": "USSR",
+      "age": 18,
+      "id": "3"
+    },
+    {
+      "name": "Admin",
+      "phone": "898987",
+      "email": "miafa@mail.ru",
+      "country": "USA",
+      "age": 18,
+      "id": "4"
+    },
+    {
+      "name": "User2",
+      "phone": "898987",
+      "important": false,
+      "email": "fafaf@afaf.eu",
+      "country": "Australia",
+      "age": "",
+      "id": "5"
+    }
+  ]
+}

@@ -9,13 +9,14 @@ function CustomStyle({template, onUpdateStyle, loading }) {
     //onUpdateValue(template);
     //template = value;
     useEffect(() => {
-        onUpdateValue(template);
-        // console.log('value', value);
-        // let timerId = setInterval(onUpdateStyle, 5000, value);
-        // return () => {
-        //     clearInterval(timerId);
-        // }
-    }, [template/*, value, onUpdateStyle*/]);
+        if (!value) onUpdateValue(template);
+        console.log('value', value);
+
+        let timerId = setInterval(onUpdateStyle, 5000, value);
+        return () => {
+            clearInterval(timerId);
+        }
+    }, [template, value, onUpdateStyle]);
 
     //console.log('value', value);
     

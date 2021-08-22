@@ -37,7 +37,7 @@ function CustomStyle({template, onUpdateStyle, loading }) {
     if (loading) {
         return <Spinner/>
     }
-    let arr = value.split('\n');//value.replace(/}/g,'}\n');
+    let arr = value.replace(/}/g,'}\n').split('\n');//value.replace(/}/g,'}\n');
     let style = '';
     for (let str of arr) {
         style += str.trim() + '\n';

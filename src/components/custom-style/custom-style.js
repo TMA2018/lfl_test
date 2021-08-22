@@ -1,29 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import debounce from 'lodash.debounce';
 import Spinner from '../spinner/spinner';
 import './custom-style.scss';
 
 function CustomStyle({template, onUpdateStyle, loading }) {
 
     const [value, onUpdateValue] = useState(template);
+    //const debouncedUpdateStyle = debounce(onUpdateStyle, 5000);
+    const changeStyle = (evt) => {
+        onUpdateValue(evt.target.value);
+        onUpdateStyle(evt.target.value);
+    }
+    const debouncedChangeStyle = useMemo(
+        () => debounce(changeStyle, 5000), [onUpdateStyle]
+    );
+
     //console.log('template', template);
     //onUpdateValue(template);
     //template = value;
     useEffect(() => {
         if (!value) onUpdateValue(template);
         console.log('value', value);
-
-        let timerId = setInterval(onUpdateStyle, 5000, value);
+        //debouncedChangeStyle();
+        // let timerId = setInterval(onUpdateStyle, 5000, value);
+        // return () => {
+        //     clearInterval(timerId);
+        // }
         return () => {
-            clearInterval(timerId);
+            //debouncedUpdateStyle.cancel();
+            debouncedChangeStyle.cancel();
         }
-    }, [template, value, onUpdateStyle]);
+    }, [template, value, debouncedChangeStyle]);
 
     //console.log('value', value);
     
     if (loading) {
         return <Spinner/>
     }
-    //let style = value;//value.replace(/}/g,'}\n');
+    let arr = value.split('\n');//value.replace(/}/g,'}\n');
+    let style = '';
+    for (let str of arr) {
+        style += str.trim() + '\n';
+    }
     return (
         <div className='customStyle'>
             <textarea
@@ -32,20 +50,16 @@ function CustomStyle({template, onUpdateStyle, loading }) {
                 placeholder='write new style'
                 //onChange = {this.onUpdateStyle}
                 //defaultValue={style}
-                defaultValue={value}
+                defaultValue={style}
                 rows = {20}
                 cols = {30}
-                onChange = {(evt) => onUpdateValue(evt.target.value)}
+                onChange = {debouncedChangeStyle}
             ></textarea>
-            {/* <pre>
-                {style}
-            </pre> */}
             <button 
                 type='button' 
                 className='btn customStyle__btn'
-                onClick={ () => onUpdateStyle(value)}
-            >
-                Обновить стили
+                onClick={ () => onUpdateStyle(style)}
+            >Обновить стили
             </button>
         </div>
     )

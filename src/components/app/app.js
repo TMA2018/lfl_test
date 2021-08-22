@@ -7,7 +7,7 @@ const axios = require('axios');
 
 function App() {
 
-    let urlPost = 'https://sheets.amateum.com/graphic/611a13fe643d22548b08a89c';
+    const urlPost = 'https://sheets.amateum.com/graphic/611a13fe643d22548b08a89c';
     const urlTemplate =  'https://rest.amateum.com/templates/611a138d728e210c2c38d795';
 
     const [template, onUpdateTemplate] = useState('');
@@ -54,9 +54,7 @@ function App() {
         .then( res => console.log('posting successful', res.data))
         .catch(function (error) {
             console.log(error);
-        });;
-            // .then( data => console.log('posting successful', data))
-            // .catch(console.log(`posting to ${this.urlTemplate} failure`));
+        });
 
         onUpdateTemplate(customStyle);
         onUpdateLoadingTemplate(false);
